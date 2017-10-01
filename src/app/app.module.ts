@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AngularOpenlayersModule } from 'ngx-openlayers';
+
 import {
   NgModule,
   ApplicationRef
@@ -66,6 +68,8 @@ type StoreType = {
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+      AngularOpenlayersModule,
+
     RouterModule.forRoot(ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules

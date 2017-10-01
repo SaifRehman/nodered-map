@@ -32,6 +32,30 @@ import {Headers, RequestOptions} from '@angular/http';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+
+    public zoom = 15;
+    public opacity = 1.0;
+    public width = 5;
+
+    increaseZoom() {
+        this.zoom  = Math.min(this.zoom + 1, 18);
+        console.log('zoom: ', this.zoom);
+    }
+
+    decreaseZoom() {
+        this.zoom  = Math.max(this.zoom - 1, 1);
+        console.log('zoom: ', this.zoom);
+    }
+
+    increaseOpacity() {
+        this.opacity  = Math.min(this.opacity + 0.1, 1);
+        console.log('opacity: ', this.opacity);
+    }
+
+    decreaseOpacity() {
+        this.opacity  = Math.max(this.opacity - 0.1, 0);
+        console.log('opacity: ', this.opacity);
+    }
   /**
    * Set our default values
    */
@@ -47,23 +71,22 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit() {
     console.log('hello `Home` component');
-    /**
-     * this.title.getData().subscribe(data => this.data = data);
-     */
-
-    let link = "https://worood-iot-automotive-starter-iot-automotive-starter.mybluemix.net/user/driverInsights/behaviors/latest";
-    let options = new RequestOptions({
+      /**
+       * this.title.getData().subscribe(data => this.data = data);
+       */
+      var options = new RequestOptions({
           headers: new Headers({
-              Accept: 'application/json'
+              'content-type': 'application/json'
           })
       });
+      let link: string;
+      link = 'https://worood-iot-automotive-starter-iot-automotive-starter.mybluemix.net/user/driverInsights/behaviors/latest';
     this.http.get(link, options)
           .subscribe((data1) => {
-        console.log(JSON.parse(data1['_body']));
-              // this.provider.status= JSON.parse(data1["_body"]);
-              // this.provider.status  = this.provider.status["quotes"];
-              // console.log(this.provider.status);
-          },(error) => {
+              // this.provider.token = JSON.parse(data1["_body"]);
+              // this.provider.token = this.provider.token["token"];
+              console.log(JSON.parse(data1['_body']));
+          }, (error) => {
               console.log('error');
           });
   }
